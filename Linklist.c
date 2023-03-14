@@ -2,7 +2,7 @@
  * @Author: Wulnut carepdime@gmail.com
  * @Date: 2023-03-13 11:01:03
  * @LastEditors: Wulnut carepdime@gmail.com
- * @LastEditTime: 2023-03-14 11:23:06
+ * @LastEditTime: 2023-03-14 11:37:17
  * @FilePath: /task/Linklist.c
  * @Description:
  */
@@ -69,7 +69,7 @@ int delete_node (ListNode **head, int data) {
         current = current->next;
     }
 
-    if (current == NULL || current->next == NULL) return 0;
+    if (current == NULL) return 0;
 
     if (previous == NULL) {
         *head = current->next;
