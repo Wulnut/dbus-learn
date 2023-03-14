@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<node name="/com/upointech/dbus">
+    <interface name="com.upointech.dbus.ObjectManager">
+        <!--添加需要新增的对象路劲-->
+        <method name="AddObject">
+            <arg name="objpath_out" type="o" direction="out" />
+        </method>
+        <signal name="interfacesAdded">
+            <arg name="object_path" type="o" /> 
+        </signal>
+        <!--删除需要的对象路径-->
+        <method name="DeleteObject">
+            <arg name="objpath_in" type="o" direction="in" />
+            <arg name="objpath_out" type="o" direction="out" />
+        </method>
+        <signal name="InterfacesRemoved">
+            <arg name="object_path" type="o" />
+        </signal>
+        <!-- 返回下属对象和支持的接口和属性-->
+        <method name="GetManagedObjects">
+            <arg name="object_paths_interfaces_and_properties" type="ao" direction="out" />
+        </method>
+    </interface>
+</node>
