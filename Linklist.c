@@ -2,7 +2,7 @@
  * @Author: Wulnut carepdime@gmail.com
  * @Date: 2023-03-13 11:01:03
  * @LastEditors: Wulnut carepdime@gmail.com
- * @LastEditTime: 2023-03-14 11:02:26
+ * @LastEditTime: 2023-03-14 11:23:06
  * @FilePath: /task/Linklist.c
  * @Description:
  */
@@ -61,8 +61,8 @@ int delete_node (ListNode **head, int data) {
     ListNode *current = *head; // 当前节点
     ListNode *previous = NULL; // 前一个节点
 
-    printf("current data: %d\n", data);
-    printf("current path: %s id: %d\n", current->str, *(current->str + (strlen(current->str) - 1)) - '0');
+    // printf("current data: %d\n", data);
+    // printf("current path: %s id: %d\n", current->str, *(current->str + (strlen(current->str) - 1)) - '0');
 
     while (current != NULL && *(current->str + (strlen(current->str) - 1)) - '0' != data) {
         previous = current;

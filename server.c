@@ -84,7 +84,7 @@ static gboolean on_handle_delete_object(interfaceObjectManager *skeleton,
   } else {
     printf("object path %s does not exist\n", str);
   }
-  print_list(list);
+  // print_list(list);
   // 绑定相应接口
   interface_object_manager_complete_delete_object(skeleton, invocation, str);
 
