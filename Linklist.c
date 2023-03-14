@@ -2,7 +2,7 @@
  * @Author: Wulnut carepdime@gmail.com
  * @Date: 2023-03-13 11:01:03
  * @LastEditors: Wulnut carepdime@gmail.com
- * @LastEditTime: 2023-03-14 11:37:17
+ * @LastEditTime: 2023-03-14 17:01:57
  * @FilePath: /task/Linklist.c
  * @Description:
  */
@@ -112,4 +112,50 @@ void print_list(ListNode *head) {
         printf("print %s\n ", current->str);
         current = current->next;
     }
+}
+
+void insert_at_end(ListNode** head, char *data) {
+    ListNode* node = create_node(data);
+    
+    if (*head == NULL) {
+        *head = node;
+    } else {
+        ListNode* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = node;
+    }
+}
+
+int move_node_to_tail(ListNode** head, int data) {
+    if (*head == NULL || (*head)->next == NULL) return 0;
+
+    ListNode* current = *head;
+    ListNode* previous = NULL;
+    ListNode* target = NULL;
+
+    while (current != NULL) {
+        if (*(current->str + (strlen(current->str) - 1)) - '0' == data) {
+            target = current;
+            break;
+        }
+
+        previous = current;
+        current = current->next;
+    }
+
+    if (target == NULL) return 0;
+
+    if (previous != NULL) {
+        previous->next = target->next;
+    } else {
+        *head = target->next;
+    }
+
+    insert_at_end(head, target->str);
+
+    free(target);
+
+    return 1;
 }

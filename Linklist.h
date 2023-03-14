@@ -1,3 +1,11 @@
+/*
+ * @Author: Wulnut carepdime@gmail.com
+ * @Date: 2023-03-14 11:20:02
+ * @LastEditors: Wulnut carepdime@gmail.com
+ * @LastEditTime: 2023-03-14 17:03:48
+ * @FilePath: /dbus-learn/Linklist.h
+ * @Description: 
+ */
 
 #ifndef __LINKLIST_H__
 #define __LINKLIST_H__
@@ -30,5 +38,11 @@ void print_list(ListNode* head);
 
 //释放链表内存
 void free_list(ListNode** head);
+
+// 移动节点到链表末尾
+int move_node_to_tail(ListNode** head, int data);
+
+// 在链表末尾插入节点
+void insert_at_end(ListNode** head, char *data);
 
 #endif /*__LINKLIST_H*/

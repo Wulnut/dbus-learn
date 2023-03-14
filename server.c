@@ -13,14 +13,6 @@ ListNode *list;
 static interfaceObjectManager *skeleton = NULL;
 static int gchar_status = 1;
 
-// typedef struct {
-//   int status;  // 状态码
-//   char *str;
-// } DataType;
-// static DataType hash_table[MAXSIZE];
-
-
-
 // InterfaceAdded 信号实现
 static gboolean emit_interface_added_status_signal(gchar *object_path) {
   printf("emit_interface_added_status_signal invoked\n");
@@ -39,8 +31,7 @@ static gboolean on_handle_add_object(interfaceObjectManager *skeleton,
   gchar *object_path = NULL;
   //  为什么不适用strcpy和strcat，因为多段字符串进行拼接的时候存在重复运算
   asprintf(&object_path, "/com/upointech/dbus/Test/%d", gchar_status);  // 最求性能可以使用memcpy或者手写
-  // hash_table[gchar_status - 1].str = strdup(object_path);  // strdup是什么意思 可以在使用完空间后进行释放
-  // hash_table[gchar_status - 1].status = 1;  // 修改状态值
+
   append_node(&list, object_path);
   // print_list(list);
   printf("\"%s\" string \"AddObject\"\n", object_path);
@@ -68,23 +59,14 @@ static gboolean on_handle_delete_object(interfaceObjectManager *skeleton,
                                         GDBusMethodInvocation *invocation,
                                         const gchar *str) {
   
-  // if (*(str + (strlen(str) - 1)) - '0' < gchar_status &&
-  //     hash_table[*(str + (strlen(str) - 1)) - '1'].status == 1) {  // 如果存在就删除
-
-  //   hash_table[*(str + (strlen(str) - 1)) - '1'].status = 0;
-
-  //   printf("object path %s has been deleted\n", hash_table[*(str + (strlen(str) - 1)) - '1'].str);
-
-  // } else {  // 如果不存在就打印
-    
+  // if (delete_node(&list, *(str + (strlen(str) - 1)) - '0')) {
+  //   printf("object path %s has been deleted\n", str); 
+  // } else {
   //   printf("object path %s does not exist\n", str);
   // }
-  if (delete_node(&list, *(str + (strlen(str) - 1)) - '0')) {
+  if (move_node_to_tail(&list, *(str + (strlen(str) - 1)) - '0')) {
     printf("object path %s has been deleted\n", str); 
-  } else {
-    printf("object path %s does not exist\n", str);
   }
-  // print_list(list);
   // 绑定相应接口
   interface_object_manager_complete_delete_object(skeleton, invocation, str);
 
@@ -103,14 +85,6 @@ static gboolean on_handle_get_managed_objects(
   int i = 0;
   char *ret[MAXSIZE] = {NULL}; // 需要初始化
 
-  // for (int i = 0; i < gchar_status - 1; ++ i) {
-    
-  //   if (hash_table[i].status == 1) {
-
-  //     *(ret + i) = hash_table[i].str;
-
-  //   }
-  // }
   while (node != NULL) {
     *(ret + i) = node->str;
     ++ i;
